@@ -1,6 +1,3 @@
-# gatsby-plugin-bch-sweep
+# gatsby-plugin-bch-create-token
 
-This is a UI plugin for [bch-wallet-starter](https://github.com/Permissionless-Software-Foundation/bch-wallet-starter). It enables sweeping of BCH and SLP tokens from a paper wallet.
-The business logic for the actual sweeping is contained in the [bch-token-sweep](https://github.com/Permissionless-Software-Foundation/bch-token-sweep) npm library.
-
-
+This is a UI plugin for [bch-wallet-starter](https://github.com/Permissionless-Software-Foundation/bch-wallet-starter). It enables the creation of SLP tokens with mutable data and permissionless token icons. This repository is forked from [gatsby-plugin-bch-sweep](https://github.com/Permissionless-Software-Foundation/gatsby-plugin-bch-sweep).

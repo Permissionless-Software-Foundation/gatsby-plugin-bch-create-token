@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-plugin-bch-sweep",
+  "name": "gatsby-plugin-bch-create-token",
   "version": "1.0.0",
-  "description": "Gatsby Plugin to sweep BCH and tokens",
+  "description": "Gatsby Plugin to create SLP tokens with mutable data",
   "main": "index.js",
   "scripts": {
     "test": "npm run lint",
@@ -14,8 +14,7 @@
   ],
   "author": "Chris Troutner <chris.troutner@gmail.com>",
   "contributors": [
-    "Daniel Gonzalez <danielhumgon@gmail.com>",
-    "Andre Cabrera <andrecabrera@protonmail.ch>"
+    "Daniel Gonzalez <danielhumgon@gmail.com>"
   ],
   "license": "MIT",
   "devDependencies": {
