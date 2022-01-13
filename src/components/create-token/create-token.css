@@ -1,0 +1,16 @@
+.token-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.create-token-btn{
+    width: 100px;
+}
+.err-msg{
+    color: red;
+}
+.success-msg {
+    color: green;
+}
