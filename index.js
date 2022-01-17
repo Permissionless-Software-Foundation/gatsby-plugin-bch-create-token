@@ -1,4 +1,4 @@
 // noop
-import Sweep from './src/components/sweep'
+import CreateToken from './src/components/create-token/index'
 
-export default Sweep
+export default CreateToken
