@@ -165,7 +165,7 @@ class CreateToken extends Component {
     try {
       _this.setState({ inFetch: true, txid: '' })
 
-      const { name, ticker, documentURL, decimals, initialQty, mspAddr } = _this.state
+      const { name, ticker, documentURL, decimals, initialQty } = _this.state
       _this.validateInputs()
       const tokenData = {
         name,
@@ -203,7 +203,7 @@ class CreateToken extends Component {
   }
   validateInputs() {
     try {
-      const { name, ticker, documentURL, initialQty, mspAddr } = _this.state
+      const { name, ticker, documentURL, initialQty } = _this.state
       if (!name) {
         throw new Error('Token Name is required')
       }
@@ -215,9 +215,6 @@ class CreateToken extends Component {
       }
       if (!initialQty) {
         throw new Error('Token Quantity is required')
-      }
-      if (!mspAddr) {
-        throw new Error('Msp Address is required')
       }
       return true
     } catch (error) {
