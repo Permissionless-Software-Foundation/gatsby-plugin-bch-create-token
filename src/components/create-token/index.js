@@ -4,10 +4,8 @@ import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import { Content, Row, Col, Button, Inputs, Box } from "adminlte-2-react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import { Helmet } from "react-helmet"
 import "./create-token.css"
-
-const SlpMutableData = typeof window !== 'undefined' ? require('slp-mutable-data').SlpMutableData : null
 
 const { Text, Select } = Inputs
 let _this
@@ -28,7 +26,8 @@ class CreateToken extends Component {
       mspAddr: '',
       txid: '',
       inFetch: false,
-      explorerURL: ''
+      explorerURL: '',
+      isLoaded : false
 
     }
   }
@@ -36,6 +35,10 @@ class CreateToken extends Component {
   render() {
     return (
       <>
+        <Helmet> 
+          <script src="https://unpkg.com/slp-mutable-data@1.4.1/dist/slp-mutable-data.min.js" />
+        </Helmet>
+ 
         {_this.props.walletInfo.mnemonic ? <Content >
           <Row className='token-form'>
 
@@ -139,21 +142,23 @@ class CreateToken extends Component {
           </Row>
 
         </Content> :
-        <Content>
-          <Box padding='true' className='container-nofound'>
-            <Row>
-              <Col xs={12}>
-                <em>You need to create or import a wallet first</em>
-              </Col>
-            </Row>
-          </Box>
-        </Content>}
+          <Content>
+            <Box padding='true' className='container-nofound'>
+              <Row>
+                <Col xs={12}>
+                  <em>You need to create or import a wallet first</em>
+                </Col>
+              </Row>
+            </Box>
+          </Content>}
       </>
     )
   }
   async componentDidMount() {
     _this.defineExplorer()
+
   }
+
   handleUpdate(event) {
     const value = event.target.value
     _this.setState({
@@ -163,6 +168,8 @@ class CreateToken extends Component {
 
   async handleCreate() {
     try {
+      const SlpMutableData = typeof window !== 'undefined' ? window.SlpMutableData : null
+
       _this.setState({ inFetch: true, txid: '' })
 
       const { name, ticker, documentURL, decimals, initialQty } = _this.state
@@ -178,8 +185,8 @@ class CreateToken extends Component {
 
 
       const { privateKey, cashAddress } = _this.props.walletInfo
-
-      const slpMutableData = new SlpMutableData()
+      const _SlpMutableData =  SlpMutableData.SlpMutableData
+      const slpMutableData = new _SlpMutableData()
       slpMutableData.bchjs = _this.props.bchWallet.bchjs
       const txid = await slpMutableData.create.createToken(
         privateKey,
@@ -250,7 +257,7 @@ class CreateToken extends Component {
   // depending on the selected chain
   defineExplorer() {
     const bchWalletLib = _this.props.bchWallet
-    if(!bchWalletLib || !bchWalletLib.bchjs) return
+    if (!bchWalletLib || !bchWalletLib.bchjs) return
 
     const bchjs = bchWalletLib.bchjs
 
