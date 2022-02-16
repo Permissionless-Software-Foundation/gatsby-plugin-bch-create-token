@@ -1,0 +1,45 @@
+{
+  "name": "gatsby-plugin-bch-create-token",
+  "version": "1.0.0",
+  "description": "Gatsby Plugin to create SLP tokens with mutable data",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run lint",
+    "build": "echo \"No build script setup\"",
+    "lint": "standard --env mocha --fix"
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin"
+  ],
+  "author": "Chris Troutner <chris.troutner@gmail.com>",
+  "contributors": [
+    "Daniel Gonzalez <danielhumgon@gmail.com>"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "semantic-release": "^17.3.9",
+    "standard": "^16.0.3"
+  },
+  "release": {
+    "publish": [
+      {
+        "path": "@semantic-release/npm",
+        "npmPublish": true
+      }
+    ]
+  },
+  "dependencies": {
+    "adminlte-2-react": "^0.1.27",
+    "assert": "^2.0.0",
+    "browserify-zlib": "^0.2.0",
+    "crypto-browserify": "^3.12.0",
+    "https-browserify": "^1.0.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "react-helmet": "^6.1.0",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "webpack": "^5.65.0"
+  }
+}
