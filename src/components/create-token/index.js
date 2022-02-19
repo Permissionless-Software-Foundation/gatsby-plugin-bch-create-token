@@ -27,7 +27,7 @@ class CreateToken extends Component {
       txid: '',
       inFetch: false,
       explorerURL: '',
-      isLoaded : false
+      isLoaded: false
 
     }
   }
@@ -35,10 +35,10 @@ class CreateToken extends Component {
   render() {
     return (
       <>
-        <Helmet> 
-          <script src="https://unpkg.com/slp-mutable-data@1.4.1/dist/slp-mutable-data.min.js" />
+        <Helmet>
+          <script src="https://unpkg.com/slp-mutable-data" />
         </Helmet>
- 
+
         {_this.props.walletInfo.mnemonic ? <Content >
           <Row className='token-form'>
 
@@ -185,9 +185,12 @@ class CreateToken extends Component {
 
 
       const { privateKey, cashAddress } = _this.props.walletInfo
-      const _SlpMutableData =  SlpMutableData.SlpMutableData
-      const slpMutableData = new _SlpMutableData()
-      slpMutableData.bchjs = _this.props.bchWallet.bchjs
+      const _SlpMutableData = SlpMutableData.SlpMutableData
+
+      const bchjsOptions = _this.getBchjsOptions()
+      const slpMutableData = new _SlpMutableData(bchjsOptions)
+      //slpMutableData.bchjs = _this.props.bchWallet.bchjs
+
       const txid = await slpMutableData.create.createToken(
         privateKey,
         tokenData,
@@ -271,6 +274,45 @@ class CreateToken extends Component {
     _this.setState({
       explorerURL
     })
+  }
+  getBchjsOptions() {
+    try {
+      const { walletInfo } = _this.props
+
+      const _interface = walletInfo.interface 
+
+      const jwtToken = walletInfo.JWT
+      const restURL = walletInfo.selectedServer
+      const bchjsOptions = {}
+
+      if (jwtToken) {
+        bchjsOptions.apiToken = jwtToken
+      }
+      
+      if (_interface === 'consumer-api') {
+        bchjsOptions.interface = _interface
+        bchjsOptions.restURL = restURL
+        return bchjsOptions
+      }
+
+
+      if (restURL) {
+        bchjsOptions.restURL = restURL
+      }
+
+      if (_interface === 'rest-api') {
+        bchjsOptions.interface = _interface
+      }
+
+      // Assign the tx fee based on environment variable
+      const FEE = process.env.FEE ? process.env.FEE : 1
+      bchjsOptions.fee = FEE
+      console.log(`Using ${bchjsOptions.fee} sats per byte for tx fees.`)
+
+      return bchjsOptions
+    } catch (error) {
+      console.warn(error)
+    }
   }
 
 }
