@@ -1,6 +1,6 @@
 {
   "name": "fullstack-gatsby-plugin-bch-create-token",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A fork of the gatsby-plugin-bch-create-token, customized for wallet.fullstack.cash.",
   "main": "index.js",
   "scripts": {
