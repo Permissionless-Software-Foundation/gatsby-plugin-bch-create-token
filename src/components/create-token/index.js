@@ -19,6 +19,7 @@ class CreateToken extends Component {
       name: '',
       ticker: '',
       documentURL: '',
+      documentHash: '',
       decimals: 0,
       initialQty: 1,
       mintBaton: null,
@@ -85,6 +86,17 @@ class CreateToken extends Component {
                       value={_this.state.documentURL}
                       placeholder={`Enter Document URL`}
                       label='Document URL'
+                      labelPosition='above'
+                      onChange={_this.handleUpdate}
+                    />
+                  </Col>
+                  <Col xs={12} >
+                    <Text
+                      id='documentHash'
+                      name='documentHash'
+                      value={_this.state.documentHash}
+                      placeholder={`Enter Document Hash`}
+                      label='Document Hash'
                       labelPosition='above'
                       onChange={_this.handleUpdate}
                     />
@@ -172,12 +184,13 @@ class CreateToken extends Component {
 
       _this.setState({ inFetch: true, txid: '' })
 
-      const { name, ticker, documentURL, decimals, initialQty } = _this.state
+      const { name, ticker, documentURL, decimals, initialQty, documentHash } = _this.state
       _this.validateInputs()
       const tokenData = {
         name,
         ticker,
         documentUrl: documentURL,
+        documentHash,
         decimals,
         initialQty,
         mintBatonVout: null
@@ -236,7 +249,7 @@ class CreateToken extends Component {
     try {
       // Ticker Validator
       if (key === 'ticker') {
-        if (value.length <= 4) {
+        if (value.length <= 10) {
           return value.toUpperCase()
         } else {
           return _this.state[key].toUpperCase()
